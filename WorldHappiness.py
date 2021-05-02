@@ -12,6 +12,7 @@ class WorldHappiness():
         
         self.file_menu = Menu(self.menu,tearoff = 0)
         self.file_menu.add_command(label="Insert a csv", accelerator='Ctrl+O', command=self.insertcsv)
+        self.file_menu.add_command(label="Close File", accelerator="Ctrl+F4", command=self.closefile)
         self.file_menu.add_command(label="Exit", accelerator= 'Alt+F4',command = self.exitmenu)
         self.menu.add_cascade(label = "File",menu=self.file_menu)
         
@@ -31,7 +32,10 @@ class WorldHappiness():
     
     def insertcsv(self):
         pass
-    
+
+    def closefile(self):
+        pass
+
 
     
     def exitmenu(self):
