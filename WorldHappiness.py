@@ -11,7 +11,8 @@ class WorldHappiness():
         self.menu = Menu(self.master)
         
         self.file_menu = Menu(self.menu,tearoff = 0)
-        self.file_menu.add_command(label="Exit",accelerator= 'Alt+F4',command = self.exitmenu)
+        self.file_menu.add_command(label="Insert a csv", accelerator='Ctrl+O', command=self.insertcsv)
+        self.file_menu.add_command(label="Exit", accelerator= 'Alt+F4',command = self.exitmenu)
         self.menu.add_cascade(label = "File",menu=self.file_menu)
         
         self.about_menu = Menu(self.menu,tearoff = 0)
@@ -26,6 +27,11 @@ class WorldHappiness():
         self.master.bind('<Alt-F4>',lambda event: self.exitmenu())
         self.master.bind('<Control-F1>',lambda event: self.helpmenu())
         self.master.bind('<Control-i>',lambda event: self.aboutmenu())
+
+    
+    def insertcsv(self):
+        pass
+    
 
     
     def exitmenu(self):
