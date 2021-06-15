@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
 
 FILENAME = "world-happiness-report-2021.csv"
@@ -27,13 +28,19 @@ def ladderscoreofeverycontinent(dataframe):
 
 def getmax(dataframe):
     maxinfos = []
-    dataframe.loc[dataframe["Ladder score"]==dataframe["Ladder score"].max()]["Country name"]
+    index = list(dataframe)
+    index.remove("Country name")
+    index.remove("Regional indicator")
+    for i in index:
+        maxinfos.append(str(dataframe.loc[dataframe[str(i)]==dataframe[str(i)].max()]["Country name"]))
+    return maxinfos
 
 
 def main():
     df = createdataframe(FILENAME)
     ladderscoreofeverycontinent(df)
-
+    infos = getmax(df)
+    print(infos)
 
 if __name__ == '__main__':
     main()
