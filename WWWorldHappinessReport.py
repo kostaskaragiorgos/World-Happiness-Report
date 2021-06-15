@@ -14,6 +14,11 @@ def createdataframe(filename):
     return pd.read_csv(filename)
 
 def ladderscoreofeverycontinent(dataframe):
+    """
+    Ladder score of every continent.
+    Args:
+        dataframe: a dataframe
+    """
     indexlist = dataframe["Regional indicator"].unique().tolist()
     for i in indexlist:
         dataframe[dataframe["Regional indicator"]==str(i)].plot(kind='barh', x="Country name", y="Ladder score", figsize=(10,15))
@@ -21,7 +26,6 @@ def ladderscoreofeverycontinent(dataframe):
 
 def main():
     df = createdataframe(FILENAME)
-    print(df)
     ladderscoreofeverycontinent(df)
 
 
