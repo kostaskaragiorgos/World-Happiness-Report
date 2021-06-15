@@ -24,6 +24,12 @@ def ladderscoreofeverycontinent(dataframe):
         dataframe[dataframe["Regional indicator"]==str(i)].plot(kind='barh', x="Country name", y="Ladder score", figsize=(10,15))
         plt.savefig("plots/Happiness of "+str(i)+".png")
 
+
+def getmax(dataframe):
+    maxinfos = []
+    dataframe.loc[dataframe["Ladder score"]==dataframe["Ladder score"].max()]["Country name"]
+
+
 def main():
     df = createdataframe(FILENAME)
     ladderscoreofeverycontinent(df)
