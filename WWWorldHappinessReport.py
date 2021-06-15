@@ -31,6 +31,14 @@ def plotseofeverycontinent(dataframe):
 
 
 def getvalueofcomparison(info, dataframe, comparison):
+    """
+    Args:
+        info: a list of info
+        dataframe: the dataframe
+        comparison: min or max
+    Return:
+        info: a list
+    """
     index = list(dataframe)
     index.remove("Country name")
     index.remove("Regional indicator")
