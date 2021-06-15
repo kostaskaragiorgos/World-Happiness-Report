@@ -33,11 +33,12 @@ def plotseofeverycontinent(dataframe):
     for i in indexlist:
         for j in index:
             dataframe[dataframe["Regional indicator"]==str(i)].plot(kind='barh', x="Country name", y=str(j), figsize=(10,15))
-            plt.savefig("plots/"+str(j) + "of "+str(i)+".png")
+            plt.savefig("plots/"+str(j) + " of "+str(i)+".png")
 
 
 def getvalueofcomparison(info, dataframe, comparison):
     """
+    Adds to a list the min or max value for every column name based on the value of comparison.
     Args:
         info: a list of info
         dataframe: the dataframe
@@ -55,15 +56,26 @@ def getvalueofcomparison(info, dataframe, comparison):
             info.append(str(i) + str(dataframe.loc[dataframe[str(i)]==dataframe[str(i)].max()]["Country name"].to_string(index=False))+ str(dataframe.loc[dataframe[str(i)]==dataframe[str(i)].max()][i].to_string(index=False)))
     return info
 
-
+def addtoafile(data, flag):
+    """
+    write data to a .txt file
+    Args:
+        data: data to the file save 
+    """
+    with open('dailyreport.txt', flag) as f:
+        f.writelines(data)
 
 def main():
+    """ main function """
     info = []
     df = createdataframe(FILENAME)
     plotseofeverycontinent(df)
     logging.info("Plots for every continent have been successfully created")
-    info = getvalueofcomparison(info, df, "min")
-    info = getvalueofcomparison(info, df, "max")
+    infomin = getvalueofcomparison(info, df, "min")
+    addtoafile(infomin, "w")
+    infomax = getvalueofcomparison(info, df, "max")
+    addtoafile(infomax, "a+")
+    logging.info("dailyreport.txt has been successfully created")
     os.system("pause")
 
 if __name__ == '__main__':
