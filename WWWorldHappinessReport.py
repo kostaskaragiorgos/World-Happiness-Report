@@ -26,21 +26,26 @@ def ladderscoreofeverycontinent(dataframe):
         plt.savefig("plots/Happiness of "+str(i)+".png")
 
 
-def getmax(dataframe):
-    maxinfos = []
+def getvalueofcomparison(info, dataframe, comparison):
     index = list(dataframe)
     index.remove("Country name")
     index.remove("Regional indicator")
     for i in index:
-        maxinfos.append(str(dataframe.loc[dataframe[str(i)]==dataframe[str(i)].max()]["Country name"]))
-    return maxinfos
+        if comparison == "min":
+            info.append(str(i) + str(dataframe.loc[dataframe[str(i)]==dataframe[str(i)].min()]["Country name"].to_string(index=False))+ str(dataframe.loc[dataframe[str(i)]==dataframe[str(i)].min()][i].to_string(index=False)))
+        else:
+            info.append(str(i) + str(dataframe.loc[dataframe[str(i)]==dataframe[str(i)].max()]["Country name"].to_string(index=False))+ str(dataframe.loc[dataframe[str(i)]==dataframe[str(i)].max()][i].to_string(index=False)))
+    return info
+
 
 
 def main():
+    info = []
     df = createdataframe(FILENAME)
     ladderscoreofeverycontinent(df)
-    infos = getmax(df)
-    print(infos)
+    info = getvalueofcomparison(info, df, "min")
+    info = getvalueofcomparison(info, df, "max")
+    print(info)
 
 if __name__ == '__main__':
     main()
