@@ -1,6 +1,12 @@
+import logging
+import os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+
+logging.basicConfig(filename='test.log', level=logging.INFO,
+                    format='%(levelname)s:%(message)s')
+logging.getLogger().addHandler(logging.StreamHandler())
 
 FILENAME = "world-happiness-report-2021.csv"
 
@@ -55,8 +61,10 @@ def main():
     info = []
     df = createdataframe(FILENAME)
     plotseofeverycontinent(df)
+    logging.info("Plots for every continent have been successfully created")
     info = getvalueofcomparison(info, df, "min")
     info = getvalueofcomparison(info, df, "max")
+    os.system("pause")
 
 if __name__ == '__main__':
     main()
