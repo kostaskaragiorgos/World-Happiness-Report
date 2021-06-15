@@ -14,16 +14,20 @@ def createdataframe(filename):
     """
     return pd.read_csv(filename)
 
-def ladderscoreofeverycontinent(dataframe):
+def plotseofeverycontinent(dataframe):
     """
-    Ladder score of every continent.
+    Every plot for every continent.
     Args:
         dataframe: a dataframe
     """
     indexlist = dataframe["Regional indicator"].unique().tolist()
+    index = list(dataframe)
+    index.remove("Country name")
+    index.remove("Regional indicator")
     for i in indexlist:
-        dataframe[dataframe["Regional indicator"]==str(i)].plot(kind='barh', x="Country name", y="Ladder score", figsize=(10,15))
-        plt.savefig("plots/Happiness of "+str(i)+".png")
+        for j in index:
+            dataframe[dataframe["Regional indicator"]==str(i)].plot(kind='barh', x="Country name", y=str(j), figsize=(10,15))
+            plt.savefig("plots/"+str(j) + "of "+str(i)+".png")
 
 
 def getvalueofcomparison(info, dataframe, comparison):
@@ -42,10 +46,9 @@ def getvalueofcomparison(info, dataframe, comparison):
 def main():
     info = []
     df = createdataframe(FILENAME)
-    ladderscoreofeverycontinent(df)
+    plotseofeverycontinent(df)
     info = getvalueofcomparison(info, df, "min")
     info = getvalueofcomparison(info, df, "max")
-    print(info)
 
 if __name__ == '__main__':
     main()
