@@ -33,7 +33,7 @@ def plotseofeverycontinent(dataframe):
     index.remove("Regional indicator")
     for i in indexlist:
         for j in index:
-            dataframe[dataframe["Regional indicator"]==str(i)].plot(kind='barh', x="Country name", y=str(j), figsize=(10,15))
+            dataframe[dataframe["Regional indicator"]==str(i)].plot(kind='barh', title=str(j) + " of " + str(i), x="Country name", y=str(j), figsize=(10,15))
             plt.savefig("plots/"+str(j) + " of "+str(i)+".png")
 
 
