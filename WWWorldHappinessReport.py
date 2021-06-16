@@ -3,6 +3,7 @@ import os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from operator import le, ge
 
 logging.basicConfig(filename='test.log', level=logging.INFO,
                     format='%(levelname)s:%(message)s')
@@ -56,6 +57,17 @@ def getvalueofcomparison(info, dataframe, comparison):
             info.append(str(i) + str(dataframe.loc[dataframe[str(i)]==dataframe[str(i)].max()]["Country name"].to_string(index=False))+ str(dataframe.loc[dataframe[str(i)]==dataframe[str(i)].max()][i].to_string(index=False)))
     return info
 
+
+def findhappiestcontinent(dataframe):
+    index = dataframe["Regional indicator"].unique().tolist()
+    maxplace = ""
+    maxreg = 0
+    for i in index:
+        if maxreg < dataframe.loc[dataframe["Regional indicator"]==str(i)]["Ladder score"].mean():
+            maxreg = dataframe.loc[dataframe["Regional indicator"]==str(i)]["Ladder score"].mean()
+            maxplace = str(i)
+    return maxreg, maxplace
+
 def addtoafile(data, flag):
     """
     write data to a .txt file
@@ -75,6 +87,8 @@ def main():
     addtoafile(infomin, "w")
     infomax = getvalueofcomparison(info, df, "max")
     addtoafile(infomax, "a+")
+    score, place = findhappiestcontinent(df)
+    addtoafile("\n Happiest Continent \n"+str([score, place]), "a+")
     logging.info("dailyreport.txt has been successfully created")
     os.system("pause")
 
