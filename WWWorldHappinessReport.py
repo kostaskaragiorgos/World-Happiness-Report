@@ -68,6 +68,17 @@ def findhappiestcontinent(dataframe):
             maxplace = str(i)
     return maxreg, maxplace
 
+
+def findleasthappiestcontinent(dataframe):
+    index = dataframe["Regional indicator"].unique().tolist()
+    minplace = ""
+    minreg = 10000000
+    for i in index:
+        if minreg > dataframe.loc[dataframe["Regional indicator"]==str(i)]["Ladder score"].mean():
+            minreg = dataframe.loc[dataframe["Regional indicator"]==str(i)]["Ladder score"].mean()
+            minplace = str(i)
+    return minreg, minplace
+
 def addtoafile(data, flag):
     """
     write data to a .txt file
@@ -87,8 +98,10 @@ def main():
     addtoafile(infomin, "w")
     infomax = getvalueofcomparison(info, df, "max")
     addtoafile(infomax, "a+")
-    score, place = findhappiestcontinent(df)
-    addtoafile("\n Happiest Continent \n"+str([score, place]), "a+")
+    maxscore, maxplace = findhappiestcontinent(df)
+    minscore, minplace = findleasthappiestcontinent(df)
+    addtoafile("\n Happiest Continent \n"+str([maxscore, maxplace]), "a+")
+    addtoafile("\n Least Happiest Continent \n"+str([minscore, minplace]), "a+")
     logging.info("dailyreport.txt has been successfully created")
     os.system("pause")
 

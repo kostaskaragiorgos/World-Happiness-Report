@@ -893,3 +893,5 @@ Ladder score Afghanistan 2.523Standard error of ladder score India 0.026upperwhi
  1.172Explained by: Healthy life expectancy Singapore 0.897Explained by: Freedom to make life choices Uzbekistan 0.716Explained by: Generosity Indonesia 0.541Explained by: Perceptions of corruption Singapore 0.547Dystopia + residual Benin 3.482
  Happiest Continent 
 [7.128500000000001, 'North America and ANZ']
+ Least Happiest Continent 
+[4.441857142857143, 'South Asia']
