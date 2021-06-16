@@ -46,6 +46,9 @@
 <ul>
     <li> ./images </li>
     <li> ./plots </li>
+    <li> ./notebooks </li>
+    <li> dailyreport.txt </li>
+    <li> test.log </li>
 </ul>
 
 # Radon
