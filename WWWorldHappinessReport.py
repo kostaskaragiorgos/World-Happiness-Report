@@ -67,7 +67,7 @@ def comperecontinents(dataframe, minplace = "", minreg = 1000000,maxplace = "", 
     """
     index = dataframe["Regional indicator"].unique().tolist()
     for i in index:
-        if maxflag is True:
+        if maxflag:
             if maxreg < dataframe.loc[dataframe["Regional indicator"]==str(i)]["Ladder score"].mean():
                 maxreg = dataframe.loc[dataframe["Regional indicator"]==str(i)]["Ladder score"].mean()
                 maxplace = str(i)
