@@ -74,7 +74,7 @@ def comperecontinents(dataframe, minplace = "", minreg = 1000000,maxplace = "", 
         else:
              if minreg > dataframe.loc[dataframe["Regional indicator"]==str(i)]["Ladder score"].mean():
                 minreg = dataframe.loc[dataframe["Regional indicator"]==str(i)]["Ladder score"].mean()
-                place = str(i)
+                minplace = str(i)
     return maxreg, maxplace, minreg, minplace
 
 
