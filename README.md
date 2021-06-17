@@ -48,7 +48,7 @@
     <li> ./plots </li>
     <li> ./notebooks </li>
     <li> dailyreport.txt </li>
-    <li> test.log </li>
+    <li> wwworldhappinessReport.log </li>
 </ul>
 
 # Radon
