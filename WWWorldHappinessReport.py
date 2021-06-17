@@ -67,7 +67,7 @@ def comperecontinents(dataframe, minplace = "", minreg = 1000000,maxplace = "", 
     """
     index = dataframe["Regional indicator"].unique().tolist()
     for i in index:
-        if maxflag:
+        if maxflag is True:
             if maxreg < dataframe.loc[dataframe["Regional indicator"]==str(i)]["Ladder score"].mean():
                 maxreg = dataframe.loc[dataframe["Regional indicator"]==str(i)]["Ladder score"].mean()
                 maxplace = str(i)
@@ -98,7 +98,7 @@ def main():
     infomax = getvalueofcomparison(info, df, "max")
     addtoafile(infomax, "a+")
     maxscore, maxplace , minscore, minplace = comperecontinents(df, maxflag=True)
-    maxscore, maxplace , minscore, minplace = comperecontinents(df, maxflag=False)
+    maxscore, maxplace , minscore, minplace = comperecontinents(df,maxplace=maxplace, maxreg=maxscore, maxflag=False)
     addtoafile("\n Happiest Continent \n"+str([maxscore, maxplace]), "a+")
     addtoafile("\n Least Happiest Continent \n"+str([minscore, minplace]), "a+")
     logging.info("dailyreport.txt has been successfully created")
