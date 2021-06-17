@@ -57,7 +57,7 @@ def getvalueofcomparison(info, dataframe, comparison):
     return info
 
 
-def comperecontinents(dataframe, minplace = "", minreg = 1000000,maxplace = "", maxreg = 0, maxflag=True):
+def comperecontinents(dataframe, minplace = "", minreg = 1000000,maxplace = "", maxreg = 0):
     """ gets the name and the ladder score of the happiest/least happiest continent.
     Args:
         dataframe:the dataframe
@@ -65,7 +65,6 @@ def comperecontinents(dataframe, minplace = "", minreg = 1000000,maxplace = "", 
         minreg: the min ladder score
         maxplace: the continent with the higher ladder score
         maxreg: the max ladder score
-        maxflag: flag to check the comparisson 
     Returns:
         maxreg: the max ladder score
         maxplace: the name of the continent with the max ladder score
@@ -102,8 +101,7 @@ def main():
     addtoafile(infomin, "w")
     infomax = getvalueofcomparison(info, df, "max")
     addtoafile(infomax, "a+")
-    maxscore, maxplace , minscore, minplace = comperecontinents(df, maxflag=True)
-    maxscore, maxplace , minscore, minplace = comperecontinents(df,maxplace=maxplace, maxreg=maxscore, maxflag=False)
+    maxscore, maxplace , minscore, minplace = comperecontinents(df)
     addtoafile("\n Happiest Continent \n"+str([maxscore, maxplace]), "a+")
     addtoafile("\n Least Happiest Continent \n"+str([minscore, minplace]), "a+")
     logging.info("dailyreport.txt has been successfully created")
