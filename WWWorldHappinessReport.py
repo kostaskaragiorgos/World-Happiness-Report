@@ -57,7 +57,7 @@ def getvalueofcomparison(info, dataframe, comparison):
     return info
 
 
-def comperecontinents(dataframe, minplace = "", minreg = 1000000,maxplace = "", maxreg = 0, maxflag=None):
+def comperecontinents(dataframe, minplace = "", minreg = 1000000,maxplace = "", maxreg = 0, maxflag=True):
     """ gets the name and the ladder score of the happiest continent.
     Args:
         dataframe:the dataframe
