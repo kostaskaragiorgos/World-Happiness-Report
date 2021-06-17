@@ -1,7 +1,7 @@
+""" World Wide happinness report"""
 import logging
 import os
 import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
 
 logging.basicConfig(filename='wwworldhappinessReport.log', level=logging.INFO,
@@ -32,7 +32,12 @@ def plotseofeverycontinent(dataframe):
     index.remove("Regional indicator")
     for i in indexlist:
         for j in index:
-            dataframe[dataframe["Regional indicator"]==str(i)].plot(kind='barh', title=str(j) + " of " + str(i), x="Country name", y=str(j), figsize=(10,15))
+            dataframe[dataframe["Regional indicator"] == str(i)].plot(kind='barh',
+                                                                      title=str(j) +
+                                                                      " of " + str(i),
+                                                                      x="Country name",
+                                                                      y=str(j),
+                                                                      figsize=(10, 15))
             plt.savefig("plots/"+str(j) + " of "+str(i)+".png")
 
 
@@ -51,13 +56,13 @@ def getvalueofcomparison(info, dataframe, comparison):
     index.remove("Regional indicator")
     for i in index:
         if comparison == "min":
-            info.append(str(i) + str(dataframe.loc[dataframe[str(i)]==dataframe[str(i)].min()]["Country name"].to_string(index=False))+ str(dataframe.loc[dataframe[str(i)]==dataframe[str(i)].min()][i].to_string(index=False)))
+            info.append(str(i) + str(dataframe.loc[dataframe[str(i)] == dataframe[str(i)].min()]["Country name"].to_string(index=False))+ str(dataframe.loc[dataframe[str(i)] == dataframe[str(i)].min()][i].to_string(index=False)))
         else:
-            info.append(str(i) + str(dataframe.loc[dataframe[str(i)]==dataframe[str(i)].max()]["Country name"].to_string(index=False))+ str(dataframe.loc[dataframe[str(i)]==dataframe[str(i)].max()][i].to_string(index=False)))
+            info.append(str(i) + str(dataframe.loc[dataframe[str(i)] == dataframe[str(i)].max()]["Country name"].to_string(index=False))+ str(dataframe.loc[dataframe[str(i)] == dataframe[str(i)].max()][i].to_string(index=False)))
     return info
 
 
-def comperecontinents(dataframe, minplace = "", minreg = 1000000,maxplace = "", maxreg = 0):
+def comperecontinents(dataframe, minplace="", minreg=1000000, maxplace="", maxreg=0):
     """ gets the name and the ladder score of the happiest/least happiest continent.
     Args:
         dataframe:the dataframe
@@ -73,11 +78,11 @@ def comperecontinents(dataframe, minplace = "", minreg = 1000000,maxplace = "", 
     """
     index = dataframe["Regional indicator"].unique().tolist()
     for i in index:
-        if  maxreg < dataframe.loc[dataframe["Regional indicator"]==str(i)]["Ladder score"].mean():
-            maxreg = dataframe.loc[dataframe["Regional indicator"]==str(i)]["Ladder score"].mean()
+        if  maxreg < dataframe.loc[dataframe["Regional indicator"] == str(i)]["Ladder score"].mean():
+            maxreg = dataframe.loc[dataframe["Regional indicator"] == str(i)]["Ladder score"].mean()
             maxplace = str(i)
-        elif minreg > dataframe.loc[dataframe["Regional indicator"]==str(i)]["Ladder score"].mean():
-            minreg = dataframe.loc[dataframe["Regional indicator"]==str(i)]["Ladder score"].mean()
+        elif minreg > dataframe.loc[dataframe["Regional indicator"] == str(i)]["Ladder score"].mean():
+            minreg = dataframe.loc[dataframe["Regional indicator"] == str(i)]["Ladder score"].mean()
             minplace = str(i)
     return maxreg, maxplace, minreg, minplace
 
@@ -86,7 +91,7 @@ def addtoafile(data, flag):
     """
     write data to a .txt file
     Args:
-        data: data to the file save 
+        data: data to the file save
     """
     with open('dailyreport.txt', flag) as f:
         f.writelines(data)
@@ -101,7 +106,7 @@ def main():
     addtoafile(infomin, "w")
     infomax = getvalueofcomparison(info, df, "max")
     addtoafile(infomax, "a+")
-    maxscore, maxplace , minscore, minplace = comperecontinents(df)
+    maxscore, maxplace, minscore, minplace = comperecontinents(df)
     addtoafile("\n Happiest Continent \n"+str([maxscore, maxplace]), "a+")
     addtoafile("\n Least Happiest Continent \n"+str([minscore, minplace]), "a+")
     logging.info("dailyreport.txt has been successfully created")
