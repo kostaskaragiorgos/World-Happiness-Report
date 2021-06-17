@@ -3,9 +3,8 @@ import os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from operator import le, ge
 
-logging.basicConfig(filename='test.log', level=logging.INFO,
+logging.basicConfig(filename='wwworldhappinessReport.log', level=logging.INFO,
                     format='%(levelname)s:%(message)s')
 logging.getLogger().addHandler(logging.StreamHandler())
 
@@ -58,26 +57,26 @@ def getvalueofcomparison(info, dataframe, comparison):
     return info
 
 
-def findhappiestcontinent(dataframe):
+def comperecontinents(dataframe, minplace = "", minreg = 1000000,maxplace = "", maxreg = 0, maxflag=None):
+    """ gets the name and the ladder score of the happiest continent.
+    Args:
+        dataframe:the dataframe
+    Returns:
+        maxreg: the max ladder score
+        maxplace: the name of the continent
+    """
     index = dataframe["Regional indicator"].unique().tolist()
-    maxplace = ""
-    maxreg = 0
     for i in index:
-        if maxreg < dataframe.loc[dataframe["Regional indicator"]==str(i)]["Ladder score"].mean():
-            maxreg = dataframe.loc[dataframe["Regional indicator"]==str(i)]["Ladder score"].mean()
-            maxplace = str(i)
-    return maxreg, maxplace
+        if maxflag:
+            if maxreg < dataframe.loc[dataframe["Regional indicator"]==str(i)]["Ladder score"].mean():
+                maxreg = dataframe.loc[dataframe["Regional indicator"]==str(i)]["Ladder score"].mean()
+                maxplace = str(i)
+        else:
+             if minreg > dataframe.loc[dataframe["Regional indicator"]==str(i)]["Ladder score"].mean():
+                minreg = dataframe.loc[dataframe["Regional indicator"]==str(i)]["Ladder score"].mean()
+                place = str(i)
+    return maxreg, maxplace, minreg, minplace
 
-
-def findleasthappiestcontinent(dataframe):
-    index = dataframe["Regional indicator"].unique().tolist()
-    minplace = ""
-    minreg = 10000000
-    for i in index:
-        if minreg > dataframe.loc[dataframe["Regional indicator"]==str(i)]["Ladder score"].mean():
-            minreg = dataframe.loc[dataframe["Regional indicator"]==str(i)]["Ladder score"].mean()
-            minplace = str(i)
-    return minreg, minplace
 
 def addtoafile(data, flag):
     """
@@ -98,8 +97,8 @@ def main():
     addtoafile(infomin, "w")
     infomax = getvalueofcomparison(info, df, "max")
     addtoafile(infomax, "a+")
-    maxscore, maxplace = findhappiestcontinent(df)
-    minscore, minplace = findleasthappiestcontinent(df)
+    maxscore, maxplace , minscore, minplace = comperecontinents(df, maxflag=True)
+    maxscore, maxplace , minscore, minplace = comperecontinents(df, maxflag=False)
     addtoafile("\n Happiest Continent \n"+str([maxscore, maxplace]), "a+")
     addtoafile("\n Least Happiest Continent \n"+str([minscore, minplace]), "a+")
     logging.info("dailyreport.txt has been successfully created")
