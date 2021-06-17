@@ -58,12 +58,19 @@ def getvalueofcomparison(info, dataframe, comparison):
 
 
 def comperecontinents(dataframe, minplace = "", minreg = 1000000,maxplace = "", maxreg = 0, maxflag=True):
-    """ gets the name and the ladder score of the happiest continent.
+    """ gets the name and the ladder score of the happiest/least happiest continent.
     Args:
         dataframe:the dataframe
+        minplace: the continent with the lower ladder score
+        minreg: the min ladder score
+        maxplace: the continent with the higher ladder score
+        maxreg: the max ladder score
+        maxflag: flag to check the comparisson 
     Returns:
         maxreg: the max ladder score
-        maxplace: the name of the continent
+        maxplace: the name of the continent with the max ladder score
+        minreg: the min ladder score
+        minplace: the name of the continent with the min ladder score
     """
     index = dataframe["Regional indicator"].unique().tolist()
     for i in index:
