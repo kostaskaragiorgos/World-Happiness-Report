@@ -56,9 +56,15 @@ def getvalueofcomparison(info, dataframe, comparison):
     index.remove("Regional indicator")
     for i in index:
         if comparison == "min":
-            info.append(str(i) + str(dataframe.loc[dataframe[str(i)] == dataframe[str(i)].min()]["Country name"].to_string(index=False))+ str(dataframe.loc[dataframe[str(i)] == dataframe[str(i)].min()][i].to_string(index=False)))
+            info.append(str(i) + str(dataframe.loc[dataframe[str(i)] == dataframe[str(i)].min()]
+                                     ["Country name"].to_string(index=False))+
+                        str(dataframe.loc[dataframe[str(i)] == dataframe[str(i)].min()]
+                            [i].to_string(index=False)))
         else:
-            info.append(str(i) + str(dataframe.loc[dataframe[str(i)] == dataframe[str(i)].max()]["Country name"].to_string(index=False))+ str(dataframe.loc[dataframe[str(i)] == dataframe[str(i)].max()][i].to_string(index=False)))
+            info.append(str(i) + str(dataframe.loc[dataframe[str(i)] == dataframe[str(i)].max()]
+                                     ["Country name"].to_string(index=False))+
+                        str(dataframe.loc[dataframe[str(i)] == dataframe[str(i)].max()]
+                            [i].to_string(index=False)))
     return info
 
 
