@@ -14,6 +14,7 @@ class WorldHappiness():
         self.master.title("World Happiness")
         self.master.geometry("250x200")
         self.master.resizable(False, False)
+        self.filename = ""
         
         self.menu = Menu(self.master)
         
@@ -41,7 +42,11 @@ class WorldHappiness():
         pass
 
     def closefile(self):
-        pass
+        if self.filename == "":
+            msg.showerror("ERROR", "NO FILE TO CLOSE")
+        else:
+            self.filename = ""
+            msg.showinfo("SUSSESS", "YOUR CSV FILE HAS SUCCESFULLY CLOSED")
 
     def exitmenu(self):
         """ Exit function"""
