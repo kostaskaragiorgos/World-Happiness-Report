@@ -1,6 +1,10 @@
 from tkinter import Tk, Menu
 from tkinter import messagebox as msg
 
+
+def aboutmenu():
+    msg.showinfo("ABOUT", "WORLD HAPPINESS REPORT\nVERSION 1.0")
+
 class WorldHappiness():
     def __init__(self, master):
         self.master = master
@@ -17,7 +21,7 @@ class WorldHappiness():
         self.menu.add_cascade(label="File", menu=self.file_menu)
         
         self.about_menu = Menu(self.menu, tearoff=0)
-        self.about_menu.add_command(label="About", accelerator='Ctrl+I', command=self.aboutmenu)
+        self.about_menu.add_command(label="About", accelerator='Ctrl+I', command=aboutmenu)
         self.menu.add_cascade(label="About", menu=self.about_menu)
         
         self.help_menu = Menu(self.menu, tearoff=0)
@@ -44,8 +48,7 @@ class WorldHappiness():
     def helpmenu(self):
         pass
     
-    def aboutmenu(self):
-        pass
+
 
         
 
